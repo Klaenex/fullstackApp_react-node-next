@@ -20,6 +20,17 @@ const getOneItem = async (req, res) => {
   res.status(200).json(item);
 };
 
+//get all item by category
+
+const getAllItemByCategory = async (req, res) => {
+  try {
+    const { categoryId } = req.params;
+    const items = await Item.find({ categoryId }).sort({ createdAt: -1 });
+    res.status(200).json(items);
+  } catch (error) {
+    res.status(500).json({ message: "Server error!" });
+  }
+};
 // create a new item
 const createItem = async (req, res) => {
   try {
@@ -93,6 +104,7 @@ module.exports = {
   createItem,
   getOneItem,
   getItem,
+  getAllItemByCategory,
   updateItem,
   deleteItem,
 };
