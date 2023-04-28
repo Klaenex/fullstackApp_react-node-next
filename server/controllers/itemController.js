@@ -24,13 +24,20 @@ const getOneItem = async (req, res) => {
 
 const getAllItemByCategory = async (req, res) => {
   try {
-    const { categoryId } = req.params;
-    const items = await Item.find({ categoryId }).sort({ createdAt: -1 });
+    const { id } = req.params;
+    console.log(id + " test");
+
+    const items = await Item.find({
+      categoryId: id,
+    });
+    console.log(items);
     res.status(200).json(items);
   } catch (error) {
-    res.status(500).json({ message: "Server error!" });
+    console.log(error);
+    res.status(500).json({ message: "server error" });
   }
 };
+
 // create a new item
 const createItem = async (req, res) => {
   try {
@@ -43,7 +50,7 @@ const createItem = async (req, res) => {
       price1,
       price2,
       bitterness,
-      itemId,
+      categoryId,
     } = req.body;
 
     const item = await Item.create({
@@ -55,7 +62,7 @@ const createItem = async (req, res) => {
       price1,
       price2,
       bitterness,
-      itemId,
+      categoryId,
     });
     res.status(200).json(item);
   } catch (err) {

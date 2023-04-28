@@ -1,0 +1,13 @@
+{
+  "titleCategory": "test",
+  "options": {
+    "title": true,
+    "desc": true,
+    "enDesc": true,
+    "alcool": true,
+    "price0": true,
+    "price1": false,
+    "price2": false,
+    "bitterness": false
+  }
+}

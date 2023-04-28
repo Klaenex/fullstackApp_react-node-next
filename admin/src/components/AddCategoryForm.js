@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-const AddCategoryForm = () => {
+const AddCategoryForm = ({ handleCloseModal }) => {
   const [form, setForm] = useState({
     titleCategory: "",
     options: {
@@ -31,11 +31,11 @@ const AddCategoryForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
+
     axios
       .post("/api/category", form)
       .then((response) => {
-        console.log(response.data);
+        handleCloseModal();
       })
       .catch((error) => {
         console.error(error);

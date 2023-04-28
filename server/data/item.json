@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Titre 1",
+    "desc": "Description 1",
+    "enDesc": "English Description 1",
+    "alcool": 4,
+    "price0": 5.99,
+    "price1": 6.99,
+    "price2": 7.99,
+    "bitterness": 30,
+    "categoryId": "64332022531032cc94fb7b1b"
+  },
+  {
+    "title": "Titre 2",
+    "desc": "Description 2",
+    "enDesc": "English Description 2",
+    "alcool": 5,
+    "price0": 6.99,
+    "price1": 7.99,
+    "price2": 8.99,
+    "bitterness": 40,
+    "categoryId": "64330222baf344c9f6c3549e"
+  },
+  {
+    "title": "Titre 3",
+    "desc": "Description 3",
+    "enDesc": "English Description 3",
+    "alcool": 6,
+    "price0": 7.99,
+    "price1": 8.99,
+    "price2": 9.99,
+    "bitterness": 50,
+    "categoryId": "64330222baf344c9f6c3549e"
+  }
+]
