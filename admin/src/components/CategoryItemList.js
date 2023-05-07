@@ -16,11 +16,13 @@ const CategoryItemList = ({ handleCategory }) => {
   }, [handleCategory]);
 
   return (
-    <ul>
-      {items.map((item) => (
-        <li key={item._id}>{item.title}</li>
-      ))}
-    </ul>
+    <>
+      <ul>
+        {items.map((item) => (
+          <li key={item._id}>{item._id}</li>
+        ))}
+      </ul>
+    </>
   );
 };
 
