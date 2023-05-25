@@ -31,7 +31,6 @@ const AddCategoryForm = ({ handleCloseModal }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     axios
       .post("/api/category", form)
       .then((response) => {

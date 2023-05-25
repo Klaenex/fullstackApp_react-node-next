@@ -6,11 +6,11 @@ import AddOnMenuForm from "../components/AddOnMenuForm";
 import CategoryItemList from "../components/CategoryItemList";
 
 const Menu = () => {
-  //category
+  // category
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState([]);
 
-  //modal
+  // modal
   const [showModal, setShowModal] = useState(false);
   const [formType, setFormType] = useState("");
 
@@ -20,29 +20,43 @@ const Menu = () => {
       if (response.status === 200) {
         const json = response.data;
         setCategories(json);
-        console.log(json);
         return json;
       }
     } catch (error) {
       console.log(error);
     }
   }
+
   useEffect(() => {
     fetchCategories();
-  }, []);
+    console.log(selectedCategory);
+  }, [selectedCategory]);
 
-  const changeCategory = (event) => {
-    setSelectedCategory(event.target.value);
+  const changeCategory = async (event) => {
+    var id = event.target.value;
+    try {
+      const res = await axios.get(`/api/category/${id}`);
+      if (res.status === 200) {
+        const json = res.data;
+        setSelectedCategory(json);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const openModal = (form) => {
     setFormType(form);
     setShowModal(true);
   };
+
   const handleCloseModal = async () => {
     setShowModal(false);
-    await fetchCategories();
+    if (formType === "addCategory") {
+      await fetchCategories();
+    }
   };
+
   return (
     <div className="menu">
       {showModal && (
@@ -53,43 +67,49 @@ const Menu = () => {
           {formType === "addOnMenu" && (
             <AddOnMenuForm
               handleCloseModal={handleCloseModal}
-              category={selectedCategory}
+              data={selectedCategory.options}
             />
           )}
         </Modal>
       )}
-      <h2>Menu</h2>
-      <label htmlFor="addCategory">Add a category:</label>
-      <button id="addCategory" onClick={() => openModal("addCategory")}>
-        Add category
-      </button>
-      <label htmlFor="category">Choose a category:</label>
 
-      <select
-        name="category"
-        id="category"
-        value={selectedCategory}
-        onChange={changeCategory}
-      >
-        <option value="">Choose a category</option>
-        {categories &&
-          categories.map((category) => (
-            <option key={category._id} value={category._id}>
-              {category.titleCategory}
-            </option>
-          ))}
-      </select>
-      <button
-        id="addOnMenu"
-        onClick={() => openModal("addOnMenu")}
-        disabled={!selectedCategory}
-      >
-        Add on menu
-      </button>
-      {selectedCategory && (
-        <CategoryItemList handleCategory={selectedCategory} />
+      <h2>Menu</h2>
+
+      {categories && categories.length > 0 && (
+        <>
+          <label htmlFor="addCategory">Add a category:</label>
+          <button id="addCategory" onClick={() => openModal("addCategory")}>
+            Add category
+          </button>
+          <label htmlFor="category">Choose a category:</label>
+
+          <select
+            name="category"
+            id="category"
+            value={selectedCategory._id}
+            onChange={changeCategory}
+          >
+            <option value="">Choose a category</option>
+            {categories.map((category) => (
+              <option key={category._id} value={category._id}>
+                {category.titleCategory}
+              </option>
+            ))}
+          </select>
+          <button
+            id="addOnMenu"
+            onClick={() => openModal("addOnMenu")}
+            disabled={!selectedCategory._id}
+          >
+            Add on menu
+          </button>
+          {selectedCategory && (
+            <CategoryItemList handleCategory={selectedCategory._id} />
+          )}
+        </>
       )}
     </div>
   );
 };
+
 export default Menu;
