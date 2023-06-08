@@ -68,6 +68,7 @@ const Menu = () => {
             <AddOnMenuForm
               handleCloseModal={handleCloseModal}
               data={selectedCategory.options}
+              id={selectedCategory._id}
             />
           )}
         </Modal>
