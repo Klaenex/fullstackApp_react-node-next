@@ -5,6 +5,7 @@ require("./db-connect");
 
 const categoryRoutes = require("./routes/category");
 const itemRoutes = require("./routes/item");
+const contactRoutes = require("./routes/contact");
 const PORT = process.env.PORT;
 
 const app = express();
