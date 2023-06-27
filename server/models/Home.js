@@ -14,4 +14,7 @@ const homeSchema = new Schema(
   },
   { timestamps: true }
 );
-module.exports = mongoose.model("Home", homeSchema);
+
+const Home = mongoose.model("Home", homeSchema);
+
+module.exports = Home;

@@ -23,8 +23,10 @@ const contactSchema = new Schema(
       googleMaps: String,
     },
   },
-
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Contact", contactSchema);
+const Contact = mongoose.model("Contact", contactSchema);
+Contact.init(); // Appel de la méthode init() sur le modèle Contact
+
+module.exports = Contact;
