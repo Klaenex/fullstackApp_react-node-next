@@ -1,5 +1,7 @@
 const Home = require("../models/Home");
+const multer = require("multer");
 
+upload = multer({ dest: "uploads/" });
 const getHome = async (req, res) => {
   try {
     const home = await Home.findOne();

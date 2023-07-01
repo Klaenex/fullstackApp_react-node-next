@@ -5,10 +5,10 @@ const HomeForm = ({ data }) => {
     name: "",
     title1: "",
     text1: "",
-    img1: null,
+    img1: "",
     title2: "",
     text2: "",
-    img2: null,
+    img2: "",
     instagramGalery: "",
   });
 
