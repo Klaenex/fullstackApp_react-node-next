@@ -5,13 +5,7 @@ const Nav = () => {
     <nav>
       <ul>
         <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/Contact">Contact</Link>
-        </li>
-        <li>
-          <Link to="/Menu">Menu</Link>
+          <Link to="/">Menu</Link>
         </li>
       </ul>
     </nav>
