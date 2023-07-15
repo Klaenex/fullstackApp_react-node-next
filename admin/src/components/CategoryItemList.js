@@ -19,7 +19,7 @@ const CategoryItemList = ({ handleCategory }) => {
     <>
       <ul>
         {items.map((item) => (
-          <li key={item._id}>{item._id}</li>
+          <li key={item._id}>{item.name}</li>
         ))}
       </ul>
     </>
