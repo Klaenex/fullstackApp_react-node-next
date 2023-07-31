@@ -1,5 +1,7 @@
 import { useState } from "react";
-import axios from "axios";
+
+import { createNewCategory } from "../utils/apiCategory";
+
 const AddCategoryForm = ({ handleCloseModal }) => {
   const [form, setForm] = useState({
     titleCategory: "",
@@ -31,9 +33,9 @@ const AddCategoryForm = ({ handleCloseModal }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("/api/category", form)
-      .then((response) => {
+
+    createNewCategory(form)
+      .then(() => {
         handleCloseModal();
       })
       .catch((error) => {

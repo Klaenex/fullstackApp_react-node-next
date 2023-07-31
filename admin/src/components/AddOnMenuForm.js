@@ -1,12 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 const AddOnMenuForm = ({ data, handleCloseModal, id }) => {
   const [form, setForm] = useState({ categoryId: id });
-
-  useEffect(() => {
-    console.log(form);
-  }, [form]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

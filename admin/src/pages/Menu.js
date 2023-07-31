@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+
 import Modal from "../components/Modal";
 import AddCategoryForm from "../components/AddCategoryForm";
 import AddOnMenuForm from "../components/AddOnMenuForm";
 import CategoryItemList from "../components/CategoryItemList";
-
+import { fetchCategories, fetchCategoryById } from "../utils/apiCategory";
 const Menu = () => {
   // category
   const [categories, setCategories] = useState([]);
@@ -14,35 +14,21 @@ const Menu = () => {
   const [showModal, setShowModal] = useState(false);
   const [formType, setFormType] = useState("");
 
-  async function fetchCategories() {
-    try {
-      const response = await axios.get("/api/category");
-      if (response.status === 200) {
-        const json = response.data;
-        setCategories(json);
-        return json;
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   useEffect(() => {
-    fetchCategories();
-    console.log(selectedCategory);
-  }, [selectedCategory]);
+    fetchCategories()
+      .then((data) => {
+        setCategories(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   const changeCategory = async (event) => {
     var id = event.target.value;
-    try {
-      const res = await axios.get(`/api/category/${id}`);
-      if (res.status === 200) {
-        const json = res.data;
-        setSelectedCategory(json);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    fetchCategoryById(id).then((data) => {
+      setSelectedCategory(data);
+    });
   };
 
   const openModal = (form) => {
