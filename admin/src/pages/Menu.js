@@ -8,13 +8,15 @@ import { fetchCategories, fetchCategoryById } from "../utils/apiCategory";
 const Menu = () => {
   // category
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState([]);
-
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [categoriesData, setCategoriesData] = useState([]);
   // modal
   const [showModal, setShowModal] = useState(false);
   const [formType, setFormType] = useState("");
+  //modify form
+  const [modify, setModify] = useState(false);
 
-  useEffect(() => {
+  const getCategory = () => {
     fetchCategories()
       .then((data) => {
         setCategories(data);
@@ -22,7 +24,11 @@ const Menu = () => {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  };
+
+  useEffect(() => {
+    getCategory();
+  }, [categoriesData, modify]);
 
   const changeCategory = async (event) => {
     var id = event.target.value;
@@ -39,7 +45,8 @@ const Menu = () => {
   const handleCloseModal = async () => {
     setShowModal(false);
     if (formType === "addCategory") {
-      await fetchCategories();
+      getCategory();
+    } else if (formType === "addOnMenu") {
     }
   };
 
@@ -53,8 +60,16 @@ const Menu = () => {
           {formType === "addOnMenu" && (
             <AddOnMenuForm
               handleCloseModal={handleCloseModal}
-              data={selectedCategory.options}
-              id={selectedCategory._id}
+              selectedCategory={selectedCategory}
+            />
+          )}
+          {formType === "ChangeOnMenu" && selectedCategory && (
+            <AddOnMenuForm
+              handleCloseModal={handleCloseModal}
+              selectedCategory={selectedCategory}
+              modify={modify}
+              setModify={setModify}
+              categoriesData={categoriesData}
             />
           )}
         </Modal>
@@ -62,7 +77,7 @@ const Menu = () => {
 
       <h2>Menu</h2>
 
-      {categories && categories.length > 0 && (
+      {categories.length > 0 && (
         <>
           <label htmlFor="addCategory">Add a category:</label>
           <button id="addCategory" onClick={() => openModal("addCategory")}>
@@ -73,7 +88,7 @@ const Menu = () => {
           <select
             name="category"
             id="category"
-            value={selectedCategory._id}
+            value={selectedCategory ? selectedCategory._id : ""}
             onChange={changeCategory}
           >
             <option value="">Choose a category</option>
@@ -83,15 +98,22 @@ const Menu = () => {
               </option>
             ))}
           </select>
+
           <button
             id="addOnMenu"
             onClick={() => openModal("addOnMenu")}
-            disabled={!selectedCategory._id}
+            disabled={!selectedCategory}
           >
             Add on menu
           </button>
+
           {selectedCategory && (
-            <CategoryItemList handleCategory={selectedCategory._id} />
+            <CategoryItemList
+              openModal={openModal}
+              handleCategory={selectedCategory._id}
+              setCategoriesData={setCategoriesData}
+              setModify={setModify}
+            />
           )}
         </>
       )}

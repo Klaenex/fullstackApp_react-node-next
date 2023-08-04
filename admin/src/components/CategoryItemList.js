@@ -1,7 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const CategoryItemList = ({ handleCategory }) => {
+const CategoryItemList = ({
+  handleCategory,
+  openModal,
+  setCategoriesData,
+  setModify,
+}) => {
   const [items, setItems] = useState([]);
 
   const deleteItem = async (id) => {
@@ -13,12 +18,10 @@ const CategoryItemList = ({ handleCategory }) => {
     }
   };
 
-  const modifyItem = async (id) => {
-    try {
-      console.log(id);
-    } catch (error) {
-      console.log(error);
-    }
+  const modifyItem = (itemData) => {
+    openModal("ChangeOnMenu");
+    setModify(true);
+    setCategoriesData(itemData);
   };
 
   useEffect(() => {
@@ -30,7 +33,7 @@ const CategoryItemList = ({ handleCategory }) => {
       .catch((error) => {
         console.log(error);
       });
-  }, [handleCategory]);
+  }, [handleCategory, setCategoriesData]);
 
   return (
     <>
@@ -39,7 +42,7 @@ const CategoryItemList = ({ handleCategory }) => {
           <li key={item._id}>
             <div>{item.title}</div>
             <div>
-              <button onClick={() => modifyItem(item._id)}>Modifier</button>
+              <button onClick={() => modifyItem(item)}>Modifier</button>
               <button onClick={() => deleteItem(item._id)}>Supprimer</button>
             </div>
           </li>

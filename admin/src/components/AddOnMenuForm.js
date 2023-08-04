@@ -1,17 +1,28 @@
 import { useState } from "react";
-import axios from "axios";
+import { createItem, updateItem } from "../utils/apiItem";
 
-const AddOnMenuForm = ({ data, handleCloseModal, id }) => {
-  const [form, setForm] = useState({ categoryId: id });
+const AddOnMenuForm = ({
+  selectedCategory,
+  handleCloseModal,
+  modify,
+  setModify,
+  categoriesData,
+}) => {
+  const [form, setForm] = useState({});
+
+  console.log(selectedCategory.options);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await axios.post("/api/item", form);
-      handleCloseModal();
-    } catch (error) {
-      console.error(error);
+
+    if (!modify) {
+      createItem(form);
+    } else {
+      updateItem(categoriesData._id, form);
+      setModify(false);
     }
+
+    handleCloseModal();
   };
 
   const handleInputChange = (e) => {
@@ -19,68 +30,10 @@ const AddOnMenuForm = ({ data, handleCloseModal, id }) => {
     setForm((prevForm) => ({ ...prevForm, [name]: value }));
   };
 
-  const getFormElement = ([key, value]) => {
-    if (key.startsWith("price") && value) {
-      return (
-        <div key={key}>
-          <label htmlFor={key}>{key}</label>
-          <input
-            type="number"
-            inputMode="decimal"
-            id={key}
-            name={key}
-            onChange={handleInputChange}
-          />
-        </div>
-      );
-    } else if (key.startsWith("alcool") && value) {
-      return (
-        <div key={key}>
-          <label htmlFor={key}>{key}</label>
-          <input
-            type="number"
-            inputMode="decimal"
-            id={key}
-            name={key}
-            onChange={handleInputChange}
-          />
-        </div>
-      );
-    } else if (
-      key.startsWith("bitterness") &&
-      typeof value === "boolean" &&
-      value
-    ) {
-      return (
-        <div key={key}>
-          <label htmlFor={key}>{key}</label>
-          <input
-            type="range"
-            inputMode="numeric"
-            id={key}
-            name={key}
-            min="0"
-            max="10"
-            step="1"
-            onChange={handleInputChange}
-          />
-        </div>
-      );
-    } else if (typeof value === "boolean" && value) {
-      return (
-        <div key={key}>
-          <label htmlFor={key}>{key}</label>
-          <input type="text" id={key} name={key} onChange={handleInputChange} />
-        </div>
-      );
-    }
-    return null;
-  };
-
+  const getFormElement = () => {};
   return (
     <form onSubmit={handleSubmit}>
-      {Object.entries(data).map(getFormElement)}
-      <button type="submit">Ajouter</button>
+      <button type="submit">{modify ? "Modifier" : "Ajouter"}</button>
     </form>
   );
 };
