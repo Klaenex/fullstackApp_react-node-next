@@ -5,11 +5,14 @@ import AddCategoryForm from "../components/AddCategoryForm";
 import AddOnMenuForm from "../components/AddOnMenuForm";
 import CategoryItemList from "../components/CategoryItemList";
 import { fetchCategories, fetchCategoryById } from "../utils/apiCategory";
+import { getAllItemsByCategory } from "../utils/apiItem";
 const Menu = () => {
   // category
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [categoriesData, setCategoriesData] = useState([]);
+  //items
+  const [items, setItems] = useState([]);
   // modal
   const [showModal, setShowModal] = useState(false);
   const [formType, setFormType] = useState("");
@@ -34,9 +37,12 @@ const Menu = () => {
     var id = event.target.value;
     fetchCategoryById(id).then((data) => {
       setSelectedCategory(data);
+      console.log(id);
+      getAllItemsByCategory(id).then((data) => {
+        setItems(data);
+      });
     });
   };
-
   const openModal = (form) => {
     setFormType(form);
     setShowModal(true);
@@ -110,9 +116,9 @@ const Menu = () => {
           {selectedCategory && (
             <CategoryItemList
               openModal={openModal}
-              handleCategory={selectedCategory._id}
               setCategoriesData={setCategoriesData}
               setModify={setModify}
+              items={items}
             />
           )}
         </>
