@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import "./styles/index.scss";
 import Menu from "./pages/Menu";
 // import Nav from "./components/Nav";
 function App() {

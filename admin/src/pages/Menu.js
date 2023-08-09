@@ -10,9 +10,10 @@ const Menu = () => {
   // category
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [categoriesData, setCategoriesData] = useState([]);
+
   //items
   const [items, setItems] = useState([]);
+  const [item, setItem] = useState([]);
   // modal
   const [showModal, setShowModal] = useState(false);
   const [formType, setFormType] = useState("");
@@ -31,13 +32,12 @@ const Menu = () => {
 
   useEffect(() => {
     getCategory();
-  }, [categoriesData, modify]);
+  }, [item, modify]);
 
   const changeCategory = async (event) => {
     var id = event.target.value;
     fetchCategoryById(id).then((data) => {
       setSelectedCategory(data);
-      console.log(id);
       getAllItemsByCategory(id).then((data) => {
         setItems(data);
       });
@@ -75,21 +75,21 @@ const Menu = () => {
               selectedCategory={selectedCategory}
               modify={modify}
               setModify={setModify}
-              categoriesData={categoriesData}
+              item={item}
             />
           )}
         </Modal>
       )}
 
-      <h2>Menu</h2>
+      <h2>Paramètres de votre menu</h2>
 
       {categories.length > 0 && (
         <>
-          <label htmlFor="addCategory">Add a category:</label>
+          <label htmlFor="addCategory">Ajouter une categorie: </label>
           <button id="addCategory" onClick={() => openModal("addCategory")}>
-            Add category
+            Ajouter
           </button>
-          <label htmlFor="category">Choose a category:</label>
+          <label htmlFor="category">Choisir une categorie: </label>
 
           <select
             name="category"
@@ -97,7 +97,7 @@ const Menu = () => {
             value={selectedCategory ? selectedCategory._id : ""}
             onChange={changeCategory}
           >
-            <option value="">Choose a category</option>
+            <option value="">Choisir une categorie</option>
             {categories.map((category) => (
               <option key={category._id} value={category._id}>
                 {category.titleCategory}
@@ -110,13 +110,13 @@ const Menu = () => {
             onClick={() => openModal("addOnMenu")}
             disabled={!selectedCategory}
           >
-            Add on menu
+            Ajouter au menu
           </button>
 
           {selectedCategory && (
             <CategoryItemList
               openModal={openModal}
-              setCategoriesData={setCategoriesData}
+              setItem={setItem}
               setModify={setModify}
               items={items}
             />

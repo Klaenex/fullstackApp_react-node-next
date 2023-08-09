@@ -25,8 +25,6 @@ const getOneItem = async (req, res) => {
 const getAllItemByCategory = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id + " test");
-
     const items = await Item.find({
       categoryId: id,
     });

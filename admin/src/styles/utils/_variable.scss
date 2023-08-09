@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/Poppins-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Poppins-SemiBold";
+  src: url("/fonts/Poppins-SemiBold.woff2") format("woff2");
+}
+
+$c-green: #54d086;
+$c-black: #0f0f0f;
+$c-red: #ff6a6a;
+$f-pop: "Poppins", sans-serif;
+$f-popSb: "Poppins-SemiBold", sans-serif;
+
+$screen-sm: 600px;
+$screen-md: 800px;
+$screen-lg: 1000px;
+$screen-xl: 1200px;
+$screen-custom: 1100px;

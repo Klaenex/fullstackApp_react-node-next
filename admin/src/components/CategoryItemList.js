@@ -1,13 +1,8 @@
-const CategoryItemList = ({
-  openModal,
-  setCategoriesData,
-  setModify,
-  items,
-}) => {
+const CategoryItemList = ({ openModal, setItem, setModify, items }) => {
   const modifyItem = (itemData) => {
     openModal("ChangeOnMenu");
     setModify(true);
-    setCategoriesData(itemData);
+    setItem(itemData);
   };
 
   return (

@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const Input = new Schema({
   active: { type: Boolean },
   inputType: { type: String },
+  label: { type: String },
 });
 const optionCategory = new Schema({
   name: { type: Input, required: true },
@@ -18,6 +19,7 @@ const optionCategory = new Schema({
 const categorySchema = new Schema(
   {
     titleCategory: { type: String, required: true },
+    typeOfCategory: { type: String, required: true },
     options: { type: optionCategory, required: true },
   },
   { timestamps: true }

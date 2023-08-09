@@ -6,22 +6,18 @@ const AddOnMenuForm = ({
   handleCloseModal,
   modify,
   setModify,
-  categoriesData,
+  item,
 }) => {
-  const [form, setForm] = useState({});
-
-  console.log(selectedCategory.options);
+  const [form, setForm] = useState({ categoryId: selectedCategory._id });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!modify) {
       createItem(form);
     } else {
-      updateItem(categoriesData._id, form);
+      updateItem(item._id, form);
       setModify(false);
     }
-
     handleCloseModal();
   };
 
@@ -30,9 +26,28 @@ const AddOnMenuForm = ({
     setForm((prevForm) => ({ ...prevForm, [name]: value }));
   };
 
-  const getFormElement = () => {};
+  const getFormElements = () => {
+    return Object.entries(selectedCategory.options).map(([key, option]) => {
+      if (option.active) {
+        return (
+          <input
+            key={key}
+            type={option.inputType}
+            name={key}
+            onChange={handleInputChange}
+            value={form[key] || ""}
+            placeholder={`Enter ${key}`}
+          />
+        );
+      }
+      return null;
+    });
+  };
   return (
     <form onSubmit={handleSubmit}>
+      {/* {getFormElements()} */}
+      <label>Nom:</label>
+      <input type={selectedCategory.options.name.inputType} />
       <button type="submit">{modify ? "Modifier" : "Ajouter"}</button>
     </form>
   );

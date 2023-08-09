@@ -4,15 +4,20 @@ import { createNewCategory } from "../utils/apiCategory";
 const AddCategoryForm = ({ handleCloseModal }) => {
   const [form, setForm] = useState({
     titleCategory: "",
+    typeOfCategory: "",
     options: {
-      name: { active: false, inputType: "text" },
-      desc: { active: false, inputType: "text" },
-      enDesc: { active: false, inputType: "text" },
-      alcool: { active: false, inputType: "number" },
-      price0: { active: false, inputType: "number" },
-      price1: { active: false, inputType: "number" },
-      price2: { active: false, inputType: "number" },
-      bitterness: { active: false, inputType: "number" },
+      name: { active: false, inputType: "text", label: "Nom: " },
+      desc: { active: false, inputType: "text", label: "Description: " },
+      enDesc: {
+        active: false,
+        inputType: "text",
+        label: "Description en anglais: ",
+      },
+      alcool: { active: false, inputType: "number", label: "% d'alcool: " },
+      price0: { active: false, inputType: "number", label: "Prix 25cl: " },
+      price1: { active: false, inputType: "number", label: "Prix 33cl: " },
+      price2: { active: false, inputType: "number", label: "Prix 50cl: " },
+      bitterness: { active: false, inputType: "number", label: "Amertume: " },
     },
   });
 
@@ -49,7 +54,7 @@ const AddCategoryForm = ({ handleCloseModal }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label for="titleCategory">Titre de la catégorie:</label>
+        <label htmlFor="titleCategory">Titre de la catégorie:</label>
         <input
           type="text"
           id="titleCategory"
@@ -58,15 +63,22 @@ const AddCategoryForm = ({ handleCloseModal }) => {
         />
       </div>
       <div>
-        <label for="name">Nom:</label>
+        <label htmlFor="typeOfCategory">Type de categorie: </label>
+        <select>
+          <option>Nouriture</option>
+          <option>Boisson</option>
+        </select>
+      </div>
+      <div>
+        <label htmlFor="name">Nom:</label>
         <input type="checkbox" id="name" name="name" onChange={handleChange} />
       </div>
       <div>
-        <label for="desc">Description:</label>
+        <label htmlFor="desc">Description:</label>
         <input type="checkbox" id="desc" name="desc" onChange={handleChange} />
       </div>
       <div>
-        <label for="enDesc">Description anglaise:</label>
+        <label htmlFor="enDesc">Description anglaise:</label>
         <input
           type="checkbox"
           id="enDesc"
@@ -75,7 +87,7 @@ const AddCategoryForm = ({ handleCloseModal }) => {
         />
       </div>
       <div>
-        <label for="alcool">% d'alcool:</label>
+        <label htmlFor="alcool">% d'alcool:</label>
         <input
           type="checkbox"
           id="alcool"
@@ -84,7 +96,7 @@ const AddCategoryForm = ({ handleCloseModal }) => {
         />
       </div>
       <div>
-        <label for="price0">Prix 25cl:</label>
+        <label htmlFor="price0">Prix 25cl:</label>
         <input
           type="checkbox"
           id="price0"
@@ -93,7 +105,7 @@ const AddCategoryForm = ({ handleCloseModal }) => {
         />
       </div>
       <div>
-        <label for="price1">Prix 33cl:</label>
+        <label htmlFor="price1">Prix 33cl:</label>
         <input
           type="checkbox"
           id="price1"
@@ -102,7 +114,7 @@ const AddCategoryForm = ({ handleCloseModal }) => {
         />
       </div>
       <div>
-        <label for="price2">Prix 50cl:</label>
+        <label htmlFor="price2">Prix 50cl:</label>
         <input
           type="checkbox"
           id="price2"
@@ -111,7 +123,7 @@ const AddCategoryForm = ({ handleCloseModal }) => {
         />
       </div>
       <div>
-        <label for="bitterness">Amertume:</label>
+        <label htmlFor="bitterness">Amertume:</label>
         <input
           type="checkbox"
           id="bitterness"
