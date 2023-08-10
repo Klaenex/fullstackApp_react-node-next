@@ -14,5 +14,6 @@ const homeSchema = new Schema({
   name: { type: String, required: true },
   intro: { type: introData, required: true },
   text: { type: textData, required: true },
+  galery: { type: String, require: true },
 });
 module.exports = mongoose.model("home", homeSchema);
