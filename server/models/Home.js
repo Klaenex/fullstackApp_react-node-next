@@ -2,18 +2,19 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const introData = new Schema({
-  title: { type: String, required: true },
-  text: { type: String, required: true },
+  title: { type: String, default: "" },
+  text: { type: String, default: "" },
 });
 const textData = new Schema({
-  title: { type: String, required: true },
-  text: { type: String, required: true },
+  title: { type: String, default: "" },
+  text: { type: String, default: "" },
 });
 
 const homeSchema = new Schema({
-  name: { type: String, required: true },
-  intro: { type: introData, required: true },
-  text: { type: textData, required: true },
-  galery: { type: String, require: true },
+  name: { type: String, default: "" },
+  intro: { type: introData },
+  text: { type: textData },
+  galery: { type: String, default: "" },
 });
+
 module.exports = mongoose.model("home", homeSchema);
