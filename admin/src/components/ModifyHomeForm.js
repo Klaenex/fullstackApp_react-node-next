@@ -6,8 +6,6 @@ const ModifyHomeForm = ({ home, setHome }) => {
     const { name, value } = e.target;
   };
 
-  const test = { ...home };
-
   console.log(test);
   const handleSubmit = (e) => {
     e.preventDefault();
