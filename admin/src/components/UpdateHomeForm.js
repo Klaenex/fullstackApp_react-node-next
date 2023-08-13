@@ -1,21 +1,48 @@
-import { useState } from "react"; // Assurez-vous d'importer useState
+import React, { useState } from "react";
 import { updateHome } from "../utils/apiHome";
 
-const ModifyHomeForm = ({ home, setHome }) => {
+const UpdateHomeForm = ({ home, setHome, handleCloseModal }) => {
+  const [formData, setFormData] = useState({
+    name: home.name,
+    titleIntro: home.intro.title,
+    textIntro: home.intro.text,
+    titleText: home.text.title,
+    textParagraph: home.text.text,
+  });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    updateHome()
+    const formattedData = {
+      name: formData.name,
+      intro: {
+        title: formData.titleIntro,
+        text: formData.textIntro,
+      },
+      text: {
+        title: formData.titleText,
+        text: formData.textParagraph,
+      },
+      galery: "",
+    };
+
+    updateHome(formattedData)
       .then((data) => {
         setHome(data);
       })
       .catch((error) => {
         console.error(error);
       });
+
+    handleCloseModal();
   };
 
   return (
@@ -75,4 +102,4 @@ const ModifyHomeForm = ({ home, setHome }) => {
   );
 };
 
-export default ModifyHomeForm;
+export default UpdateHomeForm;
