@@ -25,8 +25,12 @@ const getOneCategory = async (req, res) => {
 //create a new category
 const createCategory = async (req, res) => {
   try {
-    const { titleCategory, options } = req.body;
-    const category = await Category.create({ titleCategory, options });
+    const { titleCategory, typeOfCategory, options } = req.body;
+    const category = await Category.create({
+      titleCategory,
+      typeOfCategory,
+      options,
+    });
     res.status(200).json(category);
   } catch (err) {
     res.status(400).json({ error: err.message });

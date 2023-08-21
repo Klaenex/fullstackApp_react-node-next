@@ -5,7 +5,7 @@ import AddCategoryForm from "../components/AddCategoryForm";
 import AddOnMenuForm from "../components/AddOnMenuForm";
 import CategoryItemList from "../components/CategoryItemList";
 import { fetchCategories, fetchCategoryById } from "../utils/apiCategory";
-import { getAllItemsByCategory } from "../utils/apiItem";
+import { getAllItemsByCategory, deleteItem } from "../utils/apiItem";
 const Menu = () => {
   // category
   const [categories, setCategories] = useState([]);
@@ -43,6 +43,14 @@ const Menu = () => {
       });
     });
   };
+
+  const delItem = (id) => {
+    deleteItem(id).then(() => {
+      const updatedItems = items.filter((item) => item._id !== id);
+      setItems(updatedItems);
+    });
+  };
+
   const openModal = (form) => {
     setFormType(form);
     setShowModal(true);
@@ -67,12 +75,14 @@ const Menu = () => {
             <AddOnMenuForm
               handleCloseModal={handleCloseModal}
               selectedCategory={selectedCategory}
+              setItemsList={setItems}
             />
           )}
           {formType === "ChangeOnMenu" && selectedCategory && (
             <AddOnMenuForm
               handleCloseModal={handleCloseModal}
               selectedCategory={selectedCategory}
+              setItemsList={setItems}
               modify={modify}
               setModify={setModify}
               item={item}
@@ -117,6 +127,7 @@ const Menu = () => {
             <CategoryItemList
               openModal={openModal}
               setItem={setItem}
+              delItem={delItem}
               setModify={setModify}
               items={items}
             />

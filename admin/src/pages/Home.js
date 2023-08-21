@@ -1,21 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { fetchHome } from "../utils/apiHome";
+import React, { useState } from "react";
 import UpdateHomeForm from "../components/UpdateHomeForm";
 import Modal from "../components/Modal";
 
-const Home = () => {
-  const [home, setHome] = useState(null);
+const Home = ({ home, setHome }) => {
+  // const [home, setHome] = useState(null);
   const [showModal, setShowModal] = useState(false);
-
-  useEffect(() => {
-    fetchHome()
-      .then((data) => {
-        setHome(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [setHome]);
 
   const openModal = () => {
     setShowModal(true);
@@ -36,27 +25,28 @@ const Home = () => {
           />
         </Modal>
       )}
-      <h2>Paramètres de l'accueil</h2>
+      <h2 className="title">Paramètres de l'accueil</h2>
       {home && (
-        <div>
-          <div>
-            <h3>Votre nom:</h3>
-            <p>{home.name}</p>
-          </div>
-          <div>
-            <h3>Introduction</h3>
+        <section className="section">
+          <button
+            id="updateHome"
+            className="button button-top"
+            onClick={() => openModal()}
+          >
+            Modifier votre accueil
+          </button>
+
+          <div className="wrapper wrapper-home">
+            <h3 className="title title-litle">Introduction</h3>
             <p>{home.intro.title}</p>
             <p>{home.intro.text}</p>
           </div>
-          <div>
-            <h3>Paragraphe</h3>
+          <div className="wrapper wrapper-home">
+            <h3 className="title title-litle">Paragraphe</h3>
             <p>{home.text.title}</p>
             <p>{home.text.text}</p>
           </div>
-          <button id="updateHome" onClick={() => openModal()}>
-            Modifier votre accueil
-          </button>
-        </div>
+        </section>
       )}
     </>
   );

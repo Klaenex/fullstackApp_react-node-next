@@ -1,5 +1,40 @@
 body {
   background-color: $c-black;
+}
 
+.App {
+  display: grid;
+  grid-template-areas: "nav main";
+  grid-template-columns: 250px 1fr;
+}
+
+nav {
+  grid-area: nav;
+  height: 100vh;
+  border-right: 1px solid white;
+}
+
+.pages {
+  grid-area: main;
   padding: 64px;
+}
+
+.section {
+  background-color: $c-grey;
+  padding: 32px;
+  border-radius: 15px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.wrapper {
+  &-home {
+    margin-bottom: 32px;
+    p {
+      padding-left: 32px;
+      margin-bottom: 8px;
+    }
+  }
 }

@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 
-const Nav = () => {
+const Nav = ({ homeName }) => {
   return (
-    <nav>
-      <ul>
-        <li>
+    <nav className="nav">
+      <h1 className="title title-big">{homeName}</h1>
+      <ul className="nav-list">
+        <li className="nav-list-el">
           <Link to="/">Accueil</Link>
         </li>
-        <li>
+        <li className="nav-list-el">
           <Link to="/menu">Menu</Link>
         </li>
       </ul>

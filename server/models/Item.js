@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const item = new Schema({
-  title: { type: String },
+  name: { type: String },
   desc: { type: String },
   enDesc: { type: String },
   alcool: { type: Number },

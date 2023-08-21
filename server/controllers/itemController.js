@@ -40,7 +40,7 @@ const getAllItemByCategory = async (req, res) => {
 const createItem = async (req, res) => {
   try {
     const {
-      title,
+      name,
       desc,
       enDesc,
       alcool,
@@ -52,7 +52,7 @@ const createItem = async (req, res) => {
     } = req.body;
 
     const item = await Item.create({
-      title,
+      name,
       desc,
       enDesc,
       alcool,

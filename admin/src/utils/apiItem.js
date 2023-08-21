@@ -38,6 +38,7 @@ const getAllItemsByCategory = async (categoryId) => {
 const createItem = async (itemData) => {
   try {
     const response = await axios.post(baseUrl, itemData);
+    console.log(response);
     return response.data;
   } catch (error) {
     console.error("Error creating item:", error);
@@ -59,7 +60,7 @@ const deleteItem = async (id) => {
 // Fonction pour mettre à jour un item par son ID
 const updateItem = async (id, updatedItemData) => {
   try {
-    const response = await axios.put(`${baseUrl}/${id}`, updatedItemData);
+    const response = await axios.patch(`${baseUrl}/${id}`, updatedItemData);
     return response.data;
   } catch (error) {
     console.error(`Error updating item with ID ${id}:`, error);

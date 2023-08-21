@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createNewCategory } from "../utils/apiCategory";
 
 const AddCategoryForm = ({ handleCloseModal }) => {
   const [form, setForm] = useState({
     titleCategory: "",
-    typeOfCategory: "",
+    typeOfCategory: "drink",
     options: {
       name: { active: false, inputType: "text", label: "Nom: " },
       desc: { active: false, inputType: "text", label: "Description: " },
@@ -14,16 +14,53 @@ const AddCategoryForm = ({ handleCloseModal }) => {
         label: "Description en anglais: ",
       },
       alcool: { active: false, inputType: "number", label: "% d'alcool: " },
-      price0: { active: false, inputType: "number", label: "Prix 25cl: " },
-      price1: { active: false, inputType: "number", label: "Prix 33cl: " },
+      price0: { active: false, inputType: "number", label: "" },
+      price1: { active: false, inputType: "number", label: "" },
       price2: { active: false, inputType: "number", label: "Prix 50cl: " },
       bitterness: { active: false, inputType: "number", label: "Amertume: " },
     },
   });
 
+  useEffect(() => {
+    setForm((prevForm) => {
+      if (prevForm.typeOfCategory === "drink") {
+        return {
+          ...prevForm,
+          options: {
+            ...prevForm.options,
+            price0: {
+              ...prevForm.options.price0,
+              label: "Prix 25cl: ",
+            },
+            price1: {
+              ...prevForm.options.price1,
+              label: "Prix 33cl: ",
+            },
+          },
+        };
+      } else {
+        return {
+          ...prevForm,
+          options: {
+            ...prevForm.options,
+            price0: {
+              ...prevForm.options.price0,
+              label: "Prix entrée: ",
+            },
+            price1: {
+              ...prevForm.options.price1,
+              label: "Prix plat: ",
+            },
+          },
+        };
+      }
+    });
+  }, [form.typeOfCategory]);
+
   const handleChange = (e) => {
     const { name, checked, value, type } = e.target;
-    if (name === "titleCategory") {
+    console.log(form.typeOfCategory);
+    if (name === "titleCategory" || name === "typeOfCategory") {
       setForm({ ...form, [name]: value });
     } else {
       setForm({
@@ -41,7 +78,6 @@ const AddCategoryForm = ({ handleCloseModal }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
     createNewCategory(form)
       .then(() => {
         handleCloseModal();
@@ -64,21 +100,26 @@ const AddCategoryForm = ({ handleCloseModal }) => {
       </div>
       <div>
         <label htmlFor="typeOfCategory">Type de categorie: </label>
-        <select>
-          <option>Nouriture</option>
-          <option>Boisson</option>
+        <select
+          name="typeOfCategory"
+          id="typeOfCategory"
+          onChange={handleChange}
+        >
+          <option value="drink">Boisson</option>
+          <option value="food">Nouriture</option>
         </select>
       </div>
+
       <div>
-        <label htmlFor="name">Nom:</label>
+        <label htmlFor="name">{form.options.name.label}</label>
         <input type="checkbox" id="name" name="name" onChange={handleChange} />
       </div>
       <div>
-        <label htmlFor="desc">Description:</label>
+        <label htmlFor="desc">{form.options.desc.label}:</label>
         <input type="checkbox" id="desc" name="desc" onChange={handleChange} />
       </div>
       <div>
-        <label htmlFor="enDesc">Description anglaise:</label>
+        <label htmlFor="enDesc">{form.options.enDesc.label}</label>
         <input
           type="checkbox"
           id="enDesc"
@@ -86,17 +127,19 @@ const AddCategoryForm = ({ handleCloseModal }) => {
           onChange={handleChange}
         />
       </div>
+      {form.typeOfCategory === "drink" && (
+        <div>
+          <label htmlFor="alcool">{form.options.alcool.label}</label>
+          <input
+            type="checkbox"
+            id="alcool"
+            name="alcool"
+            onChange={handleChange}
+          />
+        </div>
+      )}
       <div>
-        <label htmlFor="alcool">% d'alcool:</label>
-        <input
-          type="checkbox"
-          id="alcool"
-          name="alcool"
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="price0">Prix 25cl:</label>
+        <label htmlFor="price0">{form.options.price0.label}</label>
         <input
           type="checkbox"
           id="price0"
@@ -105,7 +148,7 @@ const AddCategoryForm = ({ handleCloseModal }) => {
         />
       </div>
       <div>
-        <label htmlFor="price1">Prix 33cl:</label>
+        <label htmlFor="price1">{form.options.price1.label}</label>
         <input
           type="checkbox"
           id="price1"
@@ -113,25 +156,32 @@ const AddCategoryForm = ({ handleCloseModal }) => {
           onChange={handleChange}
         />
       </div>
-      <div>
-        <label htmlFor="price2">Prix 50cl:</label>
-        <input
-          type="checkbox"
-          id="price2"
-          name="price2"
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="bitterness">Amertume:</label>
-        <input
-          type="checkbox"
-          id="bitterness"
-          name="bitterness"
-          onChange={handleChange}
-        />
-      </div>
-      <button type="submit">Ajouter</button>
+      {form.typeOfCategory === "drink" && (
+        <>
+          <div>
+            <label htmlFor="price2">{form.options.price2.label}</label>
+            <input
+              type="checkbox"
+              id="price2"
+              name="price2"
+              onChange={handleChange}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="bitterness">{form.options.bitterness.label}</label>
+            <input
+              type="checkbox"
+              id="bitterness"
+              name="bitterness"
+              onChange={handleChange}
+            />
+          </div>
+        </>
+      )}
+      <button type="submit" className="button button-form">
+        Ajouter
+      </button>
     </form>
   );
 };

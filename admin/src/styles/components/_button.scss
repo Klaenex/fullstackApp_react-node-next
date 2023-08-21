@@ -1,0 +1,47 @@
+.button {
+  border: none;
+  padding: 10px 8px;
+  border-radius: 10px;
+  &-top {
+    background-color: $c-green;
+    margin-left: auto;
+  }
+  &-form {
+    background-color: $c-green;
+  }
+  &-icon {
+    width: 25px;
+    height: 25px;
+    background-color: transparent;
+  }
+  &-cross {
+    width: 40px;
+    height: 40px;
+    background-color: red;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &::after {
+      content: "";
+      width: 70%;
+      height: 2px;
+      display: block;
+      background-color: white;
+      position: absolute;
+      border-radius: 2px;
+
+      transform: rotate(45deg);
+    }
+    &::before {
+      content: "";
+      width: 70%;
+      height: 2px;
+      display: block;
+      background-color: white;
+      position: absolute;
+      transform: rotate(-45deg);
+      border-radius: 2px;
+    }
+  }
+}

@@ -1,16 +1,29 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
+
 import "./styles/index.scss";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 import Nav from "./components/Nav";
+import { fetchHome } from "./utils/apiHome";
 function App() {
+  const [home, setHome] = useState(null);
+  useEffect(() => {
+    fetchHome()
+      .then((data) => {
+        setHome(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [setHome]);
   return (
     <div className="App">
       <BrowserRouter>
-        <Nav />
+        {home && <Nav homeName={home.name} />}
         <div className="pages">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home home={home} setHome={setHome} />} />
             <Route path="/menu" element={<Menu />} />
           </Routes>
         </div>

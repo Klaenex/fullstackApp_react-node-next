@@ -1,4 +1,10 @@
-const CategoryItemList = ({ openModal, setItem, setModify, items }) => {
+const CategoryItemList = ({
+  openModal,
+  setItem,
+  setModify,
+  items,
+  delItem,
+}) => {
   const modifyItem = (itemData) => {
     openModal("ChangeOnMenu");
     setModify(true);
@@ -10,10 +16,18 @@ const CategoryItemList = ({ openModal, setItem, setModify, items }) => {
       <ul>
         {items.map((item) => (
           <li key={item._id}>
-            <div>{item.title}</div>
+            <div>{item.name}</div>
             <div>
-              <button onClick={() => modifyItem(item)}>Modifier</button>
-              <button onClick={() => console.log(item.categoryId)}>
+              <button
+                className="button button-icon"
+                onClick={() => modifyItem(item)}
+              >
+                Modifier
+              </button>
+              <button
+                className="button button-icon"
+                onClick={() => delItem(item._id)}
+              >
                 Supprimer
               </button>
             </div>

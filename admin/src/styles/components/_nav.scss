@@ -1,0 +1,23 @@
+.nav {
+  color: white;
+}
+
+.nav {
+  padding: 64px 32px;
+  padding-right: 8px;
+  &-list {
+    list-style: none;
+    &-el {
+      height: 52px;
+      border-bottom: 1px solid rgba($color: #fff, $alpha: 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      a {
+        font-size: 1.41rem;
+        width: 100%;
+        text-decoration: none;
+      }
+    }
+  }
+}

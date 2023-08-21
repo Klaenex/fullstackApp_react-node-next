@@ -1,8 +1,11 @@
 const Modal = ({ handleCloseModal, children }) => {
   return (
     <>
-      <button onClick={handleCloseModal}>Close modal</button>
-      {children}
+      <div className="shadow_modal"></div>
+      <div className="modal">
+        <div className="button button-cross" onClick={handleCloseModal}></div>
+        {children}
+      </div>
     </>
   );
 };

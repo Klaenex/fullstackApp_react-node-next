@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { createItem, updateItem } from "../utils/apiItem";
+import {
+  createItem,
+  updateItem,
+  getAllItemsByCategory,
+} from "../utils/apiItem";
 
 const AddOnMenuForm = ({
   selectedCategory,
@@ -7,8 +11,12 @@ const AddOnMenuForm = ({
   modify,
   setModify,
   item,
+  setItemsList,
 }) => {
-  const [form, setForm] = useState({ categoryId: selectedCategory._id });
+  const [form, setForm] = useState({
+    categoryId: selectedCategory._id,
+    ...(modify ? item : {}),
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +26,10 @@ const AddOnMenuForm = ({
       updateItem(item._id, form);
       setModify(false);
     }
+    getAllItemsByCategory(selectedCategory._id).then((data) => {
+      console.log(setItemsList);
+      setItemsList(data);
+    });
     handleCloseModal();
   };
 
@@ -25,19 +37,20 @@ const AddOnMenuForm = ({
     const { name, value } = e.target;
     setForm((prevForm) => ({ ...prevForm, [name]: value }));
   };
-
   const getFormElements = () => {
     return Object.entries(selectedCategory.options).map(([key, option]) => {
       if (option.active) {
         return (
-          <input
-            key={key}
-            type={option.inputType}
-            name={key}
-            onChange={handleInputChange}
-            value={form[key] || ""}
-            placeholder={`Enter ${key}`}
-          />
+          <div key={key}>
+            <label htmlFor={key}>{option.label}</label>
+            <input
+              type={option.inputType}
+              name={key}
+              onChange={handleInputChange}
+              value={form[key] || ""}
+              placeholder={`Enter ${key}`}
+            />
+          </div>
         );
       }
       return null;
@@ -45,10 +58,10 @@ const AddOnMenuForm = ({
   };
   return (
     <form onSubmit={handleSubmit}>
-      {/* {getFormElements()} */}
-      <label>Nom:</label>
-      <input type={selectedCategory.options.name.inputType} />
-      <button type="submit">{modify ? "Modifier" : "Ajouter"}</button>
+      {getFormElements()}
+      <button type="submit" className="button">
+        {modify ? "Modifier" : "Ajouter"}
+      </button>
     </form>
   );
 };

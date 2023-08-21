@@ -97,7 +97,9 @@ const UpdateHomeForm = ({ home, setHome, handleCloseModal }) => {
           onChange={handleChange}
         />
       </div>
-      <button type="submit">Modifier</button>
+      <button className="button button-form" type="submit">
+        Modifier
+      </button>
     </form>
   );
 };
