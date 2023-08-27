@@ -2,12 +2,15 @@
   border: none;
   padding: 10px 8px;
   border-radius: 10px;
+  color: white;
+  background-color: $c-green;
   &-top {
-    background-color: $c-green;
     margin-left: auto;
+    margin-bottom: 4rem;
   }
   &-form {
     background-color: $c-green;
+    margin-right: auto;
   }
   &-icon {
     width: 25px;
@@ -15,32 +18,39 @@
     background-color: transparent;
   }
   &-cross {
-    width: 40px;
-    height: 40px;
-    background-color: red;
-    position: relative;
+    width: 25px;
+    height: 25px;
+    padding: 32px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: 45px;
+    margin-right: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: transparent;
+    cursor: pointer;
     &::after {
       content: "";
-      width: 70%;
+      width: 26px;
       height: 2px;
       display: block;
       background-color: white;
       position: absolute;
       border-radius: 2px;
-
-      transform: rotate(45deg);
+      text-shadow: -1px -1px 0 $c-grey, 1px -1px 0 $c-grey, -1px 1px 0 $c-grey,
+        1px 1px 0 $c-grey;
+      transform: rotate(-45deg);
     }
     &::before {
       content: "";
-      width: 70%;
+      width: 26px;
       height: 2px;
       display: block;
       background-color: white;
       position: absolute;
-      transform: rotate(-45deg);
+      transform: rotate(45deg);
       border-radius: 2px;
     }
   }

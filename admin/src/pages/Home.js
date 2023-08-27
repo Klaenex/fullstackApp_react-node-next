@@ -3,17 +3,13 @@ import UpdateHomeForm from "../components/UpdateHomeForm";
 import Modal from "../components/Modal";
 
 const Home = ({ home, setHome }) => {
-  // const [home, setHome] = useState(null);
   const [showModal, setShowModal] = useState(false);
-
   const openModal = () => {
     setShowModal(true);
   };
-
   const handleCloseModal = async () => {
     setShowModal(false);
   };
-
   return (
     <>
       {showModal && (

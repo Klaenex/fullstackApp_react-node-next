@@ -65,7 +65,7 @@ const Menu = () => {
   };
 
   return (
-    <div className="menu">
+    <>
       {showModal && (
         <Modal handleCloseModal={handleCloseModal}>
           {formType === "addCategory" && (
@@ -90,51 +90,61 @@ const Menu = () => {
           )}
         </Modal>
       )}
-
       <h2>Paramètres de votre menu</h2>
+      <section className="section">
+        {categories.length > 0 && (
+          <>
+            <button
+              id="addCategory"
+              className="button button-top"
+              onClick={() => openModal("addCategory")}
+            >
+              Ajouter categorie
+            </button>
 
-      {categories.length > 0 && (
-        <>
-          <label htmlFor="addCategory">Ajouter une categorie: </label>
-          <button id="addCategory" onClick={() => openModal("addCategory")}>
-            Ajouter
-          </button>
-          <label htmlFor="category">Choisir une categorie: </label>
+            <div className="wrapper wrapper-home">
+              <label htmlFor="category" className="label label-title">
+                Sélectionne une catégorie:{" "}
+              </label>
+              <select
+                name="category"
+                id="category"
+                className="input input-select"
+                value={selectedCategory ? selectedCategory._id : ""}
+                onChange={changeCategory}
+              >
+                <option value="">Choisir une categorie</option>
+                {categories.map((category) => (
+                  <option key={category._id} value={category._id}>
+                    {category.titleCategory}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          <select
-            name="category"
-            id="category"
-            value={selectedCategory ? selectedCategory._id : ""}
-            onChange={changeCategory}
-          >
-            <option value="">Choisir une categorie</option>
-            {categories.map((category) => (
-              <option key={category._id} value={category._id}>
-                {category.titleCategory}
-              </option>
-            ))}
-          </select>
-
-          <button
-            id="addOnMenu"
-            onClick={() => openModal("addOnMenu")}
-            disabled={!selectedCategory}
-          >
-            Ajouter au menu
-          </button>
-
-          {selectedCategory && (
-            <CategoryItemList
-              openModal={openModal}
-              setItem={setItem}
-              delItem={delItem}
-              setModify={setModify}
-              items={items}
-            />
-          )}
-        </>
-      )}
-    </div>
+            {selectedCategory && (
+              <div className="wrapper wrapper-home">
+                <button
+                  id="addOnMenu"
+                  className="button button-add"
+                  onClick={() => openModal("addOnMenu")}
+                  disabled={!selectedCategory}
+                >
+                  Ajouter au menu
+                </button>
+                <CategoryItemList
+                  openModal={openModal}
+                  setItem={setItem}
+                  delItem={delItem}
+                  setModify={setModify}
+                  items={items}
+                />
+              </div>
+            )}
+          </>
+        )}
+      </section>
+    </>
   );
 };
 

@@ -59,8 +59,8 @@ const AddOnMenuForm = ({
   return (
     <form onSubmit={handleSubmit}>
       {getFormElements()}
-      <button type="submit" className="button">
-        {modify ? "Modifier" : "Ajouter"}
+      <button type="submit" className="button button-form">
+        {modify ? "Modifier" : "Ajouter au menu"}
       </button>
     </form>
   );

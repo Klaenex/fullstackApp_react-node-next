@@ -6,7 +6,7 @@ html {
   margin: 0;
   margin-bottom: 64px;
   &-big {
-    font-size: 1.99rem;
+    font-size: 1.999rem;
     color: $c-black;
     text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
       1px 1px 0 white;
@@ -15,8 +15,17 @@ html {
   &-litle {
     margin-bottom: 8px;
   }
+  &-form {
+    margin-bottom: 32px;
+  }
 }
 
 a {
   color: white;
+}
+
+.label {
+  &-title {
+    font-size: 1.414rem;
+  }
 }

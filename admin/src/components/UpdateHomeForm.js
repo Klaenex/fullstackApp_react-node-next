@@ -46,61 +46,70 @@ const UpdateHomeForm = ({ home, setHome, handleCloseModal }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="name">Votre nom:</label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          placeholder={home.name}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="titleIntro">Titre d'intro: </label>
-        <input
-          type="text"
-          name="titleIntro"
-          id="titleIntro"
-          placeholder={home.intro.title}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="textIntro">Texte d'introduction: </label>
-        <textarea
-          type="text"
-          name="textIntro"
-          id="textIntro"
-          placeholder={home.intro.text}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="titleText">Titre du paragraphe: </label>
-        <input
-          type="text"
-          name="titleText"
-          id="natitleTextme"
-          placeholder={home.text.title}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="textParagraph">Texte d'introduction: </label>
-        <textarea
-          type="text"
-          name="textParagraph"
-          id="textParagraph"
-          placeholder={home.text.text}
-          onChange={handleChange}
-        />
-      </div>
-      <button className="button button-form" type="submit">
-        Modifier
-      </button>
-    </form>
+    <>
+      <h2 className="title title-form">Modifier votre accueil</h2>
+      <form className="form" onSubmit={handleSubmit}>
+        <div className="wrapper wrapper-formPart">
+          <label htmlFor="name" className="label label-title">
+            Nom
+          </label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            className="input"
+            placeholder={home.name || "Nom de votre entreprise:"}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="wrapper wrapper-formPart">
+          <label htmlFor="titleIntro" className="label label-title">
+            Introduction
+          </label>
+          <input
+            type="text"
+            name="titleIntro"
+            id="titleIntro"
+            className="input"
+            placeholder={home.intro.title}
+            onChange={handleChange}
+          />
+
+          <textarea
+            type="text"
+            name="textIntro"
+            id="textIntro"
+            className="input input-textarea"
+            placeholder={home.intro.text}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="wrapper wrapper-formPart">
+          <label htmlFor="titleText" className="label label-title">
+            Paragraphe
+          </label>
+          <input
+            type="text"
+            name="titleText"
+            id="titleText"
+            className="input"
+            placeholder={home.text.title}
+            onChange={handleChange}
+          />
+          <textarea
+            type="text"
+            name="textParagraph"
+            id="textParagraph"
+            className="input input-textarea"
+            placeholder={home.text.text || ""}
+            onChange={handleChange}
+          />
+        </div>
+        <button className="button button-form" type="submit">
+          Modifier
+        </button>
+      </form>
+    </>
   );
 };
 
