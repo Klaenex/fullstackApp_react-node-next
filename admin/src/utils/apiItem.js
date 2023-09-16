@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "/api/item";
+const baseUrl = "https://api-nodejs-restaurant.onrender.com/api/item";
 
 // Fonction pour récupérer tous les items
 const getAllItems = async () => {

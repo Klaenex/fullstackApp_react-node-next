@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "/api/category";
+const baseUrl = "https://api-nodejs-restaurant.onrender.com/api/category";
 
 // Récupérer toutes les catégories
 const fetchCategories = async () => {

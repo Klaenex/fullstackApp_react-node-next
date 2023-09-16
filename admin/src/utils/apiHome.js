@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "/api/home";
+const baseUrl = "https://api-nodejs-restaurant.onrender.com/api/home";
 
 const fetchHome = async () => {
   try {
