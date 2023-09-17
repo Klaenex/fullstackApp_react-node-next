@@ -15,7 +15,10 @@ const app = express();
 const whitelist = [
   "http://localhost:3000",
   "https://fullstack-app-react-node-next.vercel.app",
+  "https://fullstack-app-react-node-next-klaenex.vercel.app/",
+  "https://fullstack-app-react-node-next-git-master-klaenex.vercel.app/",
 ];
+
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || whitelist.indexOf(origin) !== -1) {
