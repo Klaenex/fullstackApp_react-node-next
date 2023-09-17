@@ -18,20 +18,6 @@ function App() {
       });
   }, [setHome]);
 
-  function outer() {
-    let counter = 0;
-    function incrementCounter() {
-      counter++;
-    }
-    return incrementCounter;
-  }
-
-  const mynewfunction = outer();
-  mynewfunction();
-  mynewfunction();
-  console.log(mynewfunction);
-  const result = mynewfunction();
-  console.log(result);
   return (
     <div className="App">
       <BrowserRouter>

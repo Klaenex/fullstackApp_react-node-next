@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import UpdateHomeForm from "../components/UpdateHomeForm";
 import Modal from "../components/Modal";
+import Update from "../components/icons/Update";
 
 const Home = ({ home, setHome }) => {
   const [showModal, setShowModal] = useState(false);
@@ -26,10 +27,10 @@ const Home = ({ home, setHome }) => {
         <section className="section">
           <button
             id="updateHome"
-            className="button button-top"
+            className="button button-top button-add"
             onClick={() => openModal()}
           >
-            Modifier votre accueil
+            Modifier votre accueil <Update />
           </button>
 
           <div className="wrapper wrapper-home">

@@ -1,0 +1,12 @@
+.list {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 4px;
+  margin: 0;
+  list-style: none;
+}
+.item-element {
+  display: flex;
+  align-items: baseline;
+  max-width: 10rem;
+}

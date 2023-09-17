@@ -4,9 +4,15 @@
   border-radius: 10px;
   color: white;
   background-color: $c-green;
+  cursor: pointer;
   &-top {
     margin-left: auto;
     margin-bottom: 4rem;
+  }
+  &-add {
+    display: flex;
+    gap: 8px;
+    align-items: center;
   }
   &-form {
     background-color: $c-green;

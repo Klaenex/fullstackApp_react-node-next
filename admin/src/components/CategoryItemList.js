@@ -1,3 +1,6 @@
+import Delete from "./icons/Delete";
+import Update from "./icons/Update";
+
 const CategoryItemList = ({
   openModal,
   setItem,
@@ -13,24 +16,24 @@ const CategoryItemList = ({
 
   return (
     <>
-      <ul>
+      <ul className="list list-item">
         {items.map((item) => (
-          <li key={item._id}>
+          <li key={item._id} className="item-element">
             <div>{item.name}</div>
-            <div>
+            <span>
               <button
                 className="button button-icon"
                 onClick={() => modifyItem(item)}
               >
-                Modifier
+                <Update />
               </button>
               <button
                 className="button button-icon"
                 onClick={() => delItem(item._id)}
               >
-                Supprimer
+                <Delete />
               </button>
-            </div>
+            </span>
           </li>
         ))}
       </ul>

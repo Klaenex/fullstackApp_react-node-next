@@ -6,6 +6,8 @@ import AddOnMenuForm from "../components/AddOnMenuForm";
 import CategoryItemList from "../components/CategoryItemList";
 import { fetchCategories, fetchCategoryById } from "../utils/apiCategory";
 import { getAllItemsByCategory, deleteItem } from "../utils/apiItem";
+
+import Plus from "../components/icons/Plus";
 const Menu = () => {
   // category
   const [categories, setCategories] = useState([]);
@@ -96,10 +98,10 @@ const Menu = () => {
           <>
             <button
               id="addCategory"
-              className="button button-top"
+              className="button button-top button-add"
               onClick={() => openModal("addCategory")}
             >
-              Ajouter categorie
+              Ajouter categorie <Plus />
             </button>
 
             <div className="wrapper wrapper-home">
@@ -130,7 +132,7 @@ const Menu = () => {
                   onClick={() => openModal("addOnMenu")}
                   disabled={!selectedCategory}
                 >
-                  Ajouter au menu
+                  Ajouter au menu <Plus />
                 </button>
                 <CategoryItemList
                   openModal={openModal}
