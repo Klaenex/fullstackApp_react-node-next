@@ -12,7 +12,10 @@ const PORT = process.env.PORT;
 const app = express();
 
 //CORS
-const whitelist = ["http://localhost:3000"];
+const whitelist = [
+  "http://localhost:3000",
+  "https://fullstack-app-react-node-next.vercel.app",
+];
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || whitelist.indexOf(origin) !== -1) {
