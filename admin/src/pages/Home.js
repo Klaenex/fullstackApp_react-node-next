@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import UpdateHomeForm from "../components/UpdateHomeForm";
 import Modal from "../components/Modal";
-import Update from "../components/icons/Update";
+import Update from "../components/svg/Update";
 
 const Home = ({ home, setHome }) => {
   const [showModal, setShowModal] = useState(false);

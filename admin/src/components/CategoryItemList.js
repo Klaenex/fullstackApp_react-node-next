@@ -1,5 +1,5 @@
-import Delete from "./icons/Delete";
-import Update from "./icons/Update";
+import Delete from "./svg/Delete";
+import Update from "./svg/Update";
 
 const CategoryItemList = ({
   openModal,

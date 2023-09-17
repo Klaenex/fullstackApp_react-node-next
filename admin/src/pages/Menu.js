@@ -7,7 +7,7 @@ import CategoryItemList from "../components/CategoryItemList";
 import { fetchCategories, fetchCategoryById } from "../utils/apiCategory";
 import { getAllItemsByCategory, deleteItem } from "../utils/apiItem";
 
-import Plus from "../components/icons/Plus";
+import Plus from "../components/svg/Plus";
 const Menu = () => {
   // category
   const [categories, setCategories] = useState([]);
